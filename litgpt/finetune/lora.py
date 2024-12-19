@@ -11,7 +11,7 @@ import warnings
 import lightning as L
 import torch
 from lightning.fabric.plugins import BitsandbytesPrecision
-from lightning.fabric.strategies import FSDPStrategy
+from lightning.fabric.strategies import FSDPStrategy, DDPStrategy
 from lightning.fabric.utilities import ThroughputMonitor
 from lightning_utilities.core.imports import RequirementCache
 from torch.utils.data import DataLoader, ConcatDataset
@@ -153,6 +153,11 @@ def setup(
             limit_all_gathers=True,
             cpu_offload=False,
         )
+
+        strategy=DDPStrategy(
+        )
+
+        
     else:
         strategy = "auto"
 
